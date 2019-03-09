@@ -14,11 +14,10 @@ import androidx.lifecycle.LiveData;
  * A Repository class handles data operations.
  * It provides a clean API to the rest of the app for app data.
  * <p>
- * A Repository is a class that abstracts access to multiple data sources.
- * The Repository is not part of the Architecture Components libraries,
- * but is a suggested best practice for code separation and architecture.
- * A Repository class handles data operations.
- * It provides a clean API to the rest of the app for app data.
+ * A Repository manages query threads and allows you to use multiple backends.
+ * In the most common example, the Repository implements the logic for
+ * deciding whether to fetch data from a network or use results cached in a
+ * local database.
  */
 
 public class WordRepository {
