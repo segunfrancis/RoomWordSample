@@ -1,6 +1,7 @@
 package com.example.computer.roomwordsample;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,7 @@ public abstract class WordRoomDatabase extends RoomDatabase {
     };
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-        private final WordDao mDao;
+        private final WordDao mDao; Intent intent;
 
         PopulateDbAsync(WordRoomDatabase db) {
             mDao = db.wordDao();
@@ -72,10 +73,12 @@ public abstract class WordRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
 //            mDao.deletaAll();
+
 //            Word word = new Word("Hello");
 //            mDao.insert(word);
 //            word = new Word("World");
 //            mDao.insert(word);
+
             return null;
         }
     }
