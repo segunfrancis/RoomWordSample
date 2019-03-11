@@ -10,7 +10,7 @@ public class Word {
 
     @PrimaryKey // each entity needs a primary key. Each word acts as it's own primary key
     @NonNull // return value can never be null
-    @ColumnInfo(name = "word") // specify column name if you wat it to be different from member variable
+    @ColumnInfo(name = "word") // specify column name if you want it to be different from member variable
     private String mWord;
 
     public Word(@NonNull String word) {
