@@ -45,6 +45,10 @@ public class WordRepository {
         new insertAsyncTask(mWordDoa).execute(word);
     }
 
+    public void deleteWord(Word word) {
+        new deleteWordAsyncTask(mWordDoa).execute(word);
+    }
+
     public void deleteAll() {
         new deleteAllWordsAsyncTask(mWordDoa).execute();
     }
@@ -77,6 +81,34 @@ public class WordRepository {
         }
     }
 
+    private static class deleteWordAsyncTask extends AsyncTask<Word, Void, Void> {
+        private WordDao mAsyncTaskDao;
+
+        public deleteWordAsyncTask(WordDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        /**
+         * Override this method to perform a computation on a background thread. The
+         * specified parameters are the parameters passed to {@link #execute}
+         * by the caller of this task.
+         * <p>
+         * This method can call {@link #publishProgress} to publish updates
+         * on the UI thread.
+         *
+         * @param params The parameters of the task.
+         * @return A result, defined by the subclass of this task.
+         * @see #onPreExecute()
+         * @see #onPostExecute
+         * @see #publishProgress
+         */
+        @Override
+        protected Void doInBackground(final Word... params) {
+            mAsyncTaskDao.deleteWord(params[0]);
+            return null;
+        }
+    }
+
     private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
         private WordDao mAsyncTaskDao;
 
@@ -98,8 +130,8 @@ public class WordRepository {
          * @see #publishProgress
          */
         @Override
-        protected Void doInBackground(Void... voids) {
-            mAsyncTaskDao.deletaAll();
+        protected Void doInBackground(final Void... voids) {
+            mAsyncTaskDao.deleteAll();
             return null;
         }
     }

@@ -78,7 +78,7 @@ public abstract class WordRoomDatabase extends RoomDatabase {
         protected Void doInBackground(final Void... params) {
             // if we have no word, then create the initial list of words
             if (mDao.getAnyWord().length < 1) {
-                for (int i = 0; i < words.length - 1; i++) {
+                for (int i = 0; i <= words.length; i++) {
                     Word word = new Word(words[i]);
                     mDao.insert(word);
                 }

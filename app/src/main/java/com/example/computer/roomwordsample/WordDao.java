@@ -4,6 +4,7 @@ import java.util.List;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -22,7 +23,12 @@ public interface WordDao {
     Word[] getAnyWord();
 
     @Query("DELETE FROM word_table")
-    void deletaAll();
+    void deleteAll();
+
+    // because the operation deletes a single row, the @Delete annotation is all
+    // that is needed to delete the word from the database
+    @Delete
+    void deleteWord(Word word);
 
     // LiveData helps in observing changes to data across multiple components of the app
     @Query("SELECT * from word_table ORDER BY word ASC")

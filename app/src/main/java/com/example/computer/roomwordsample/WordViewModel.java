@@ -33,13 +33,19 @@ public class WordViewModel extends AndroidViewModel {
     }
 
     // This completely hides the implementation from the UI.
+    // this makes the method available to the MainActivity
     LiveData<List<Word>> getAllWords() {
         return mAllWords;
     }
 
     // This completely hides the implementation from the UI.
+    // this makes the method available to the MainActivity
     public void insert(Word word) {
         mRepository.insert(word);
+    }
+
+    public void deleteWord(Word word) {
+        mRepository.deleteWord(word);
     }
 
     // this makes the method available to the MainActivity
