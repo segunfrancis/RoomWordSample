@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -50,7 +52,9 @@ public abstract class WordRoomDatabase extends RoomDatabase {
     };
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
-        private final WordDao mDao; Intent intent;
+        private final WordDao mDao;
+        String[] words = {"dolphin", "crocodile", "cobra"};
+        Intent intent;
 
         PopulateDbAsync(WordRoomDatabase db) {
             mDao = db.wordDao();
@@ -72,13 +76,13 @@ public abstract class WordRoomDatabase extends RoomDatabase {
          */
         @Override
         protected Void doInBackground(final Void... params) {
-//            mDao.deletaAll();
-
-//            Word word = new Word("Hello");
-//            mDao.insert(word);
-//            word = new Word("World");
-//            mDao.insert(word);
-
+            // if we have no word, then create the initial list of words
+            if (mDao.getAnyWord().length < 1) {
+                for (int i = 0; i < words.length - 1; i++) {
+                    Word word = new Word(words[i]);
+                    mDao.insert(word);
+                }
+            }
             return null;
         }
     }

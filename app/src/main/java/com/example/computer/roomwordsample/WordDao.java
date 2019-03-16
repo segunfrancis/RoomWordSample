@@ -18,6 +18,9 @@ public interface WordDao {
     @Insert
     void insert(Word word);
 
+    @Query("SELECT * from word_table LIMIT 1")
+    Word[] getAnyWord();
+
     @Query("DELETE FROM word_table")
     void deletaAll();
 

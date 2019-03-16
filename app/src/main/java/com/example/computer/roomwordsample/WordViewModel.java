@@ -41,6 +41,11 @@ public class WordViewModel extends AndroidViewModel {
     public void insert(Word word) {
         mRepository.insert(word);
     }
+
+    // this makes the method available to the MainActivity
+    public void deleteAll() {
+        mRepository.deleteAll();
+    }
 }
 /* Warning: Never pass context into ViewModel instances. Do not store
  * Activity, Fragment, or View instances or their Context in the ViewModel.
