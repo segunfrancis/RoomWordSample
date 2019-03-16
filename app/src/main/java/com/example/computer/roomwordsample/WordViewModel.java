@@ -52,6 +52,10 @@ public class WordViewModel extends AndroidViewModel {
     public void deleteAll() {
         mRepository.deleteAll();
     }
+
+    public void update(Word word) {
+        mRepository.update(word);
+    }
 }
 /* Warning: Never pass context into ViewModel instances. Do not store
  * Activity, Fragment, or View instances or their Context in the ViewModel.

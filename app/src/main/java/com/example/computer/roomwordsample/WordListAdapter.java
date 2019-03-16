@@ -13,38 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
-    /**
-     * Called when RecyclerView needs a new {link ViewHolder} of the given type to represent
-     * an item.
-     * <p>
-     * This new ViewHolder should be constructed with a new View that can represent the items
-     * of the given type. You can either create a new View manually or inflate it from an XML
-     * layout file.
-     * <p>
-     * The new ViewHolder will be used to display items of the adapter using
-     * {link #onBindViewHolder(ViewHolder, int, List)}. Since it will be re-used to display
-     * different items in the data set, it is a good idea to cache references to sub views of
-     * the View to avoid unnecessary {@link View#findViewById(int)} calls.
-     *
-     * param parent   The ViewGroup into which the new View will be added after it is bound to
-     *                 an adapter position.
-     * param viewType The view type of the new View.
-     * @return A new ViewHolder that holds a View of the given view type.
-     * @see #getItemViewType(int)
-     * see #onBindViewHolder(ViewHolder, int)
-     */
-
-    class WordViewHolder extends RecyclerView.ViewHolder {
-        private final TextView wordItemView;
-
-        public WordViewHolder(@NonNull View itemView) {
-            super(itemView);
-            wordItemView = itemView.findViewById(R.id.textView);
-        }
-    }
 
     private final LayoutInflater mInflater;
     private List<Word> mWords; // Cached copy of words
+    private static ClickListener clickListener;
 
     WordListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -108,5 +80,48 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
     public Word getWordAtPosition(int position) {
         return mWords.get(position);
+    }
+    /**
+     * Called when RecyclerView needs a new {link ViewHolder} of the given type to represent
+     * an item.
+     * <p>
+     * This new ViewHolder should be constructed with a new View that can represent the items
+     * of the given type. You can either create a new View manually or inflate it from an XML
+     * layout file.
+     * <p>
+     * The new ViewHolder will be used to display items of the adapter using
+     * {link #onBindViewHolder(ViewHolder, int, List)}. Since it will be re-used to display
+     * different items in the data set, it is a good idea to cache references to sub views of
+     * the View to avoid unnecessary {@link View#findViewById(int)} calls.
+     *
+     * param parent   The ViewGroup into which the new View will be added after it is bound to
+     *                 an adapter position.
+     * param viewType The view type of the new View.
+     * @return A new ViewHolder that holds a View of the given view type.
+     * @see #getItemViewType(int)
+     * see #onBindViewHolder(ViewHolder, int)
+     */
+
+    class WordViewHolder extends RecyclerView.ViewHolder {
+        private final TextView wordItemView;
+
+        public WordViewHolder(@NonNull View itemView) {
+            super(itemView);
+            wordItemView = itemView.findViewById(R.id.textView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.onItemClick(v, getAdapterPosition());
+                }
+            });
+        }
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        WordListAdapter.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(View v, int position);
     }
 }

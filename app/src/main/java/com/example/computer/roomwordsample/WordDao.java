@@ -7,6 +7,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 /* The DAO must be an interface or an abstract class
 *  By default, all queries bust be executed on a separate thread
@@ -33,4 +34,7 @@ public interface WordDao {
     // LiveData helps in observing changes to data across multiple components of the app
     @Query("SELECT * from word_table ORDER BY word ASC")
     LiveData<List<Word>> getAllWords();
+
+    @Update
+    void update(Word... word);
 }
