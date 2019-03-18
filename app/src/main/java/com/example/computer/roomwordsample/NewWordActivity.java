@@ -43,10 +43,10 @@ public class NewWordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent replyIntent = new Intent();
-                if (TextUtils.isEmpty(mEditWordView.getText())) {
+                if (TextUtils.isEmpty(mEditWordView.getText().toString().trim())) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
-                    String word = mEditWordView.getText().toString();
+                    String word = mEditWordView.getText().toString().trim();
                     replyIntent.putExtra(EXTRA_REPLY, word);
                     if (extras != null && extras.containsKey(EXTRA_DATA_ID)) {
                         int id = extras.getInt(EXTRA_DATA_ID, -1);

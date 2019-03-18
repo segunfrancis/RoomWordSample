@@ -32,7 +32,7 @@ public interface WordDao {
     void deleteWord(Word word);
 
     // LiveData helps in observing changes to data across multiple components of the app
-    @Query("SELECT * from word_table ORDER BY word ASC")
+    @Query("SELECT * from word_table ORDER BY id DESC")
     LiveData<List<Word>> getAllWords();
 
     @Update

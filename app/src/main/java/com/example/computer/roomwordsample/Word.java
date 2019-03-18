@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
 public class Word {
 
     @PrimaryKey(autoGenerate = true) // each entity needs a primary key.
-    private int id;
+    private int id = 0;
 
     @NonNull // return value can never be null
     @ColumnInfo(name = "word")
